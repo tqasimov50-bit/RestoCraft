@@ -3,175 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>RestoCraft QR Menu</title>
+<title>RestoCraft</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body{
-    font-family:Arial,sans-serif;
-    background:#0f0f0f;
-    color:#fff;
+    margin:0;
+    background:#111;
+    color:white;
+    font-family:Arial;
 }
 
 header{
     text-align:center;
-    padding:35px 20px 25px;
-    background:linear-gradient(180deg,#191919,#0f0f0f);
+    padding:30px 15px;
 }
 
 .logo{
-    width:75px;
-    height:75px;
-    margin:auto;
+    display:inline-flex;
+    width:70px;
+    height:70px;
     border-radius:50%;
     background:#ff7a00;
-    display:flex;
+    color:#111;
     align-items:center;
     justify-content:center;
-    font-size:25px;
-    font-weight:bold;
-    color:#111;
-}
-
-.restaurant-name{
-    font-size:30px;
-    margin-top:15px;
+    font-size:24px;
     font-weight:bold;
 }
 
-.restaurant-name span{
+h1{
+    margin:12px 0 5px;
+}
+
+h1 span{
     color:#ff7a00;
 }
 
 .subtitle{
-    color:#999;
-    margin-top:7px;
-    font-size:14px;
+    color:#888;
 }
 
 .categories{
+    display:flex;
+    gap:8px;
+    padding:15px;
+    overflow-x:auto;
     position:sticky;
     top:0;
-    z-index:10;
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    padding:13px;
-    background:rgba(15,15,15,.97);
-    border-bottom:1px solid #292929;
+    background:#111;
 }
 
-.categories::-webkit-scrollbar{
-    display:none;
-}
-
-.category{
-    border:1px solid #333;
-    background:#191919;
-    color:#fff;
-    padding:10px 17px;
-    border-radius:25px;
+button{
+    border:0;
+    padding:11px 16px;
+    border-radius:20px;
+    background:#222;
+    color:white;
     white-space:nowrap;
 }
 
-.category.active{
+button.active{
     background:#ff7a00;
     color:#111;
-    border-color:#ff7a00;
 }
 
 .menu{
-    max-width:700px;
+    padding:15px;
+    max-width:650px;
     margin:auto;
-    padding:10px 15px 30px;
 }
 
-.section{
+.category-title{
+    color:#ff7a00;
     margin-top:25px;
 }
 
-.section-title{
-    color:#ff7a00;
-    font-size:23px;
-    margin-bottom:13px;
-}
-
 .item{
-    display:flex;
-    align-items:center;
-    gap:13px;
-    background:#191919;
-    border:1px solid #272727;
-    border-radius:15px;
-    padding:12px;
-    margin-bottom:12px;
+    background:#1c1c1c;
+    border-radius:14px;
+    padding:15px;
+    margin:10px 0;
 }
 
-.food-image{
-    width:85px;
-    height:85px;
-    border-radius:12px;
-    object-fit:cover;
-    background:#292929;
+.item h3{
+    margin:0 0 6px;
 }
 
-.info{
-    flex:1;
-}
-
-.info h3{
-    font-size:17px;
-    margin-bottom:6px;
-}
-
-.info p{
+.item p{
     color:#999;
-    font-size:13px;
-    line-height:1.4;
+    margin:0 0 10px;
 }
 
 .price{
     color:#ff7a00;
-    font-size:17px;
     font-weight:bold;
-    white-space:nowrap;
 }
 
 .contact{
-    max-width:700px;
-    margin:auto;
-    padding:15px;
-}
-
-.contact-title{
-    color:#ff7a00;
+    padding:20px;
     text-align:center;
-    margin-bottom:15px;
 }
 
-.contact-button{
+.contact a{
     display:block;
-    text-align:center;
+    padding:14px;
+    margin:10px 0;
+    background:#ff7a00;
+    color:#111;
     text-decoration:none;
-    color:white;
-    background:#1c1c1c;
-    border:1px solid #333;
-    padding:15px;
-    border-radius:12px;
-    margin-top:10px;
-}
-
-footer{
-    text-align:center;
-    padding:30px 15px;
-    color:#666;
-    font-size:12px;
+    border-radius:10px;
+    font-weight:bold;
 }
 </style>
 </head>
@@ -179,24 +120,147 @@ footer{
 <body>
 
 <header>
-
 <div class="logo">RC</div>
-
-<div class="restaurant-name">
-Resto<span>Craft</span>
-</div>
-
-<div class="subtitle">
-Müasir QR Menyu
-</div>
-
+<h1>Resto<span>Craft</span></h1>
+<div class="subtitle">Müasir QR Menyu</div>
 </header>
-
 
 <div class="categories">
 
-<button class="category active" onclick="filterMenu('all',this)">
-Hamısı
-</button>
+<button class="active" onclick="show('all',this)">Hamısı</button>
 
-<button
+<button onclick="show('salat',this)">🥗 Salatlar</button>
+
+<button onclick="show('yemek',this)">🍽️ Əsas yeməklər</button>
+
+<button onclick="show('qutab',this)">🥟 Qutablar</button>
+
+<button onclick="show('icki',this)">🥤 İçkilər</button>
+
+</div>
+
+<div class="menu">
+
+<div class="section salat">
+<h2 class="category-title">🥗 Salatlar</h2>
+
+<div class="item">
+<h3>Çoban salatı</h3>
+<p>Pomidor, xiyar, soğan və göyərti</p>
+<div class="price">5 AZN</div>
+</div>
+
+<div class="item">
+<h3>Paytaxt salatı</h3>
+<p>Klassik salat</p>
+<div class="price">6 AZN</div>
+</div>
+</div>
+
+
+<div class="section yemek">
+<h2 class="category-title">🍽️ Əsas yeməklər</h2>
+
+<div class="item">
+<h3>Ət kababı</h3>
+<p>Manqalda hazırlanmış ət</p>
+<div class="price">10 AZN</div>
+</div>
+
+<div class="item">
+<h3>Azərbaycan plovu</h3>
+<p>Ənənəvi plov</p>
+<div class="price">8 AZN</div>
+</div>
+</div>
+
+
+<div class="section qutab">
+<h2 class="category-title">🥟 Qutablar</h2>
+
+<div class="item">
+<h3>Ət qutabı</h3>
+<p>Ət ilə hazırlanmış qutab</p>
+<div class="price">2 AZN</div>
+</div>
+
+<div class="item">
+<h3>Pendir qutabı</h3>
+<p>Pendir ilə hazırlanmış qutab</p>
+<div class="price">2 AZN</div>
+</div>
+
+<div class="item">
+<h3>Göy qutabı</h3>
+<p>Təzə göyərti ilə</p>
+<div class="price">1.50 AZN</div>
+</div>
+</div>
+
+
+<div class="section icki">
+<h2 class="category-title">🥤 İçkilər</h2>
+
+<div class="item">
+<h3>Cola</h3>
+<p>330 ml</p>
+<div class="price">2 AZN</div>
+</div>
+
+<div class="item">
+<h3>Su</h3>
+<p>500 ml</p>
+<div class="price">1 AZN</div>
+</div>
+</div>
+
+</div>
+
+
+<div class="contact">
+
+<a href="tel:0558475173">📞 Zəng et</a>
+
+<a href="https://wa.me/994558475173">
+💬 WhatsApp
+</a>
+
+<a href="https://maps.google.com">
+📍 Ünvan
+</a>
+
+</div>
+
+
+<script>
+
+function show(type,button){
+
+let sections=document.querySelectorAll(".section");
+
+document.querySelectorAll("button").forEach(function(b){
+b.classList.remove("active");
+});
+
+button.classList.add("active");
+
+sections.forEach(function(section){
+
+if(type=="all"){
+section.style.display="block";
+}
+else if(section.classList.contains(type)){
+section.style.display="block";
+}
+else{
+section.style.display="none";
+}
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

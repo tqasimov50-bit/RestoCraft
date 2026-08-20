@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>RestoCraft</title>
 
 <style>
+
 body{
     margin:0;
     background:#111;
     color:white;
-    font-family:Arial;
+    font-family:Arial,sans-serif;
 }
 
 header{
@@ -50,6 +54,7 @@ h1 span{
     overflow-x:auto;
     position:sticky;
     top:0;
+    z-index:10;
     background:#111;
 }
 
@@ -60,6 +65,7 @@ button{
     background:#222;
     color:white;
     white-space:nowrap;
+    cursor:pointer;
 }
 
 button.active{
@@ -81,8 +87,23 @@ button.active{
 .item{
     background:#1c1c1c;
     border-radius:14px;
-    padding:15px;
+    padding:12px;
     margin:10px 0;
+    display:flex;
+    gap:14px;
+    align-items:center;
+    cursor:pointer;
+}
+
+.item img{
+    width:90px;
+    height:90px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+.item-info{
+    flex:1;
 }
 
 .item h3{
@@ -92,6 +113,7 @@ button.active{
 .item p{
     color:#999;
     margin:0 0 10px;
+    font-size:14px;
 }
 
 .price{
@@ -102,6 +124,8 @@ button.active{
 .contact{
     padding:20px;
     text-align:center;
+    max-width:650px;
+    margin:auto;
 }
 
 .contact a{
@@ -113,44 +137,10 @@ button.active{
     text-decoration:none;
     border-radius:10px;
     font-weight:bold;
-}.item img{
-    width:90px;
-    height:90px;
-    object-fit:cover;
-    border-radius:12px;
 }
 
-.item{
-    display:flex;
-    gap:14px;
-    align-items:center;
-    cursor:pointer;
-}
 
-.item div{
-    flex:1;
-}
-</style>
-</head>
-<div id="foodModal" class="modal">
-
-<div class="modal-box">
-
-<span onclick="closeFood()" class="close">×</span>
-
-<img id="modalImage">
-
-<h2 id="modalName"></h2>
-
-<p id="modalDescription"></p>
-
-<div id="modalPrice" class="price"></div>
-
-</div>
-
-</div>
-
-<style>
+/* MƏHSUL PƏNCƏRƏSİ */
 
 .modal{
     display:none;
@@ -162,11 +152,12 @@ button.active{
     height:100%;
     background:rgba(0,0,0,.85);
     padding:20px;
+    box-sizing:border-box;
 }
 
 .modal-box{
     max-width:500px;
-    margin:70px auto;
+    margin:60px auto;
     background:#1c1c1c;
     padding:20px;
     border-radius:20px;
@@ -175,7 +166,7 @@ button.active{
 
 .modal-box img{
     width:100%;
-    max-height:300px;
+    height:280px;
     object-fit:cover;
     border-radius:15px;
 }
@@ -191,8 +182,8 @@ button.active{
 
 .close{
     position:absolute;
-    right:20px;
-    top:10px;
+    right:15px;
+    top:5px;
     font-size:35px;
     color:white;
     cursor:pointer;
@@ -200,7 +191,439 @@ button.active{
 
 </style>
 
+</head>
+
+<body>
+
+
+<header>
+
+<div class="logo">
+RC
+</div>
+
+<h1>
+Resto<span>Craft</span>
+</h1>
+
+<div class="subtitle">
+Müasir QR Menyu
+</div>
+
+</header>
+
+
+<!-- KATEQORİYALAR -->
+
+<div class="categories">
+
+<button class="active" onclick="showCategory('all',this)">
+Hamısı
+</button>
+
+<button onclick="showCategory('salat',this)">
+🥗 Salatlar
+</button>
+
+<button onclick="showCategory('yemek',this)">
+🍽️ Əsas yeməklər
+</button>
+
+<button onclick="showCategory('qutab',this)">
+🥟 Qutablar
+</button>
+
+<button onclick="showCategory('icki',this)">
+🥤 İçkilər
+</button>
+
+</div>
+
+
+<div class="menu">
+
+
+<!-- SALATLAR -->
+
+<div class="section salat">
+
+<h2 class="category-title">
+🥗 Salatlar
+</h2>
+
+
+<div class="item"
+onclick="openFood(
+'Çoban salatı',
+'Pomidor, xiyar, soğan və göyərtidən hazırlanmış təzə salat.',
+'5 AZN',
+'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80'
+)">
+
+<img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80">
+
+<div class="item-info">
+
+<h3>
+Çoban salatı
+</h3>
+
+<p>
+Pomidor, xiyar, soğan və göyərti
+</p>
+
+<div class="price">
+5 AZN
+</div>
+
+</div>
+
+</div>
+
+
+<div class="item"
+onclick="openFood(
+'Paytaxt salatı',
+'Klassik və ləzzətli Paytaxt salatı.',
+'6 AZN',
+'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80'
+)">
+
+<img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80">
+
+<div class="item-info">
+
+<h3>
+Paytaxt salatı
+</h3>
+
+<p>
+Klassik salat
+</p>
+
+<div class="price">
+6 AZN
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ƏSAS YEMƏKLƏR -->
+
+<div class="section yemek">
+
+<h2 class="category-title">
+🍽️ Əsas yeməklər
+</h2>
+
+
+<div class="item"
+onclick="openFood(
+'Ət kababı',
+'Manqalda hazırlanmış yumşaq və ləzzətli ət kababı.',
+'10 AZN',
+'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80'
+)">
+
+<img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80">
+
+<div class="item-info">
+
+<h3>
+Ət kababı
+</h3>
+
+<p>
+Manqalda hazırlanmış ət
+</p>
+
+<div class="price">
+10 AZN
+</div>
+
+</div>
+
+</div>
+
+
+<div class="item"
+onclick="openFood(
+'Azərbaycan plovu',
+'Ənənəvi Azərbaycan mətbəxinin ləzzətli plovu.',
+'8 AZN',
+'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80'
+)">
+
+<img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80">
+
+<div class="item-info">
+
+<h3>
+Azərbaycan plovu
+</h3>
+
+<p>
+Ənənəvi plov
+</p>
+
+<div class="price">
+8 AZN
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- QUTABLAR -->
+
+<div class="section qutab">
+
+<h2 class="category-title">
+🥟 Qutablar
+</h2>
+
+
+<div class="item"
+onclick="openFood(
+'Ət qutabı',
+'Ət ilə hazırlanmış ənənəvi qutab.',
+'2 AZN',
+'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80'
+)">
+
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80">
+
+<div class="item-info">
+
+<h3>
+Ət qutabı
+</h3>
+
+<p>
+Ət ilə hazırlanmış qutab
+</p>
+
+<div class="price">
+2 AZN
+</div>
+
+</div>
+
+</div>
+
+
+<div class="item"
+onclick="openFood(
+'Pendir qutabı',
+'Əridilmiş pendir ilə hazırlanmış qutab.',
+'2 AZN',
+'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=80'
+)">
+
+<img src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=80">
+
+<div class="item-info">
+
+<h3>
+Pendir qutabı
+</h3>
+
+<p>
+Pendir ilə hazırlanmış qutab
+</p>
+
+<div class="price">
+2 AZN
+</div>
+
+</div>
+
+</div>
+
+
+<div class="item"
+onclick="openFood(
+'Göy qutabı',
+'Təzə göyərti ilə hazırlanmış qutab.',
+'1.50 AZN',
+'https://images.unsplash.com/photo-1628294895950-9805252327f3?auto=format&fit=crop&w=800&q=80'
+)">
+
+<img src="https://images.unsplash.com/photo-1628294895950-9805252327f3?auto=format&fit=crop&w=800&q=80">
+
+<div class="item-info">
+
+<h3>
+Göy qutabı
+</h3>
+
+<p>
+Təzə göyərti ilə
+</p>
+
+<div class="price">
+1.50 AZN
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- İÇKİLƏR -->
+
+<div class="section icki">
+
+<h2 class="category-title">
+🥤 İçkilər
+</h2>
+
+
+<div class="item"
+onclick="openFood(
+'Cola',
+'330 ml soyuq Cola.',
+'2 AZN',
+'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80'
+)">
+
+<img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80">
+
+<div class="item-info">
+
+<h3>
+Cola
+</h3>
+
+<p>
+330 ml
+</p>
+
+<div class="price">
+2 AZN
+</div>
+
+</div>
+
+</div>
+
+
+<div class="item"
+onclick="openFood(
+'Su',
+'Təmiz içməli su.',
+'1 AZN',
+'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=800&q=80'
+)">
+
+<img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=800&q=80">
+
+<div class="item-info">
+
+<h3>
+Su
+</h3>
+
+<p>
+500 ml
+</p>
+
+<div class="price">
+1 AZN
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ƏLAQƏ -->
+
+<div class="contact">
+
+<a href="tel:0558475173">
+📞 Zəng et
+</a>
+
+<a href="https://wa.me/994558475173" target="_blank">
+💬 WhatsApp
+</a>
+
+<a href="https://maps.google.com" target="_blank">
+📍 Ünvan
+</a>
+
+</div>
+
+
+<!-- MƏHSUL MODALI -->
+
+<div id="foodModal" class="modal">
+
+<div class="modal-box">
+
+<span class="close" onclick="closeFood()">
+×
+</span>
+
+<img id="modalImage">
+
+<h2 id="modalName"></h2>
+
+<p id="modalDescription"></p>
+
+<div id="modalPrice" class="price"></div>
+
+</div>
+
+</div>
+
+
 <script>
+
+function showCategory(category,button){
+
+const sections=document.querySelectorAll(".section");
+
+const buttons=document.querySelectorAll(".category");
+
+buttons.forEach(function(btn){
+btn.classList.remove("active");
+});
+
+button.classList.add("active");
+
+sections.forEach(function(section){
+
+if(category==="all"){
+section.style.display="block";
+}
+
+else if(section.classList.contains(category)){
+section.style.display="block";
+}
+
+else{
+section.style.display="none";
+}
+
+});
+
+}
+
 
 function openFood(name,description,price,image){
 
@@ -216,6 +639,7 @@ document.getElementById("foodModal").style.display="block";
 
 }
 
+
 function closeFood(){
 
 document.getElementById("foodModal").style.display="none";
@@ -223,155 +647,7 @@ document.getElementById("foodModal").style.display="none";
 }
 
 </script>
-<body>
 
-<header>
-<div class="logo">RC</div>
-<h1>Resto<span>Craft</span></h1>
-<div class="subtitle">Müasir QR Menyu</div>
-</header>
-
-<div class="categories">
-
-<button class="active" onclick="show('all',this)">Hamısı</button>
-
-<button onclick="show('salat',this)">🥗 Salatlar</button>
-
-<button onclick="show('yemek',this)">🍽️ Əsas yeməklər</button>
-
-<button onclick="show('qutab',this)">🥟 Qutablar</button>
-
-<button onclick="show('icki',this)">🥤 İçkilər</button>
-
-</div>
-
-<div class="menu">
-
-<div class="section salat">
-<h2 class="category-title">🥗 Salatlar</h2>
-
-<div class="item">
-<h3>Çoban salatı</h3>
-<p>Pomidor, xiyar, soğan və göyərti</p>
-<div class="price">5 AZN</div>
-</div>
-
-<div class="item" onclick="openFood('Çoban salatı','Pomidor, xiyar, soğan və göyərti','5 AZN','https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80')">
-
-<img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80">
-
-<div>
-<h3>Çoban salatı</h3>
-<p>Pomidor, xiyar, soğan və göyərti</p>
-<div class="price">5 AZN</div>
-</div>
-
-</div>
-
-
-<div class="section yemek">
-<h2 class="category-title">🍽️ Əsas yeməklər</h2>
-
-<div class="item">
-<h3>Ət kababı</h3>
-<p>Manqalda hazırlanmış ət</p>
-<div class="price">10 AZN</div>
-</div>
-
-<div class="item">
-<h3>Azərbaycan plovu</h3>
-<p>Ənənəvi plov</p>
-<div class="price">8 AZN</div>
-</div>
-</div>
-
-
-<div class="section qutab">
-<h2 class="category-title">🥟 Qutablar</h2>
-
-<div class="item">
-<h3>Ət qutabı</h3>
-<p>Ət ilə hazırlanmış qutab</p>
-<div class="price">2 AZN</div>
-</div>
-
-<div class="item">
-<h3>Pendir qutabı</h3>
-<p>Pendir ilə hazırlanmış qutab</p>
-<div class="price">2 AZN</div>
-</div>
-
-<div class="item">
-<h3>Göy qutabı</h3>
-<p>Təzə göyərti ilə</p>
-<div class="price">1.50 AZN</div>
-</div>
-</div>
-
-
-<div class="section icki">
-<h2 class="category-title">🥤 İçkilər</h2>
-
-<div class="item">
-<h3>Cola</h3>
-<p>330 ml</p>
-<div class="price">2 AZN</div>
-</div>
-
-<div class="item">
-<h3>Su</h3>
-<p>500 ml</p>
-<div class="price">1 AZN</div>
-</div>
-</div>
-
-</div>
-
-
-<div class="contact">
-
-<a href="tel:0558475173">📞 Zəng et</a>
-
-<a href="https://wa.me/994558475173">
-💬 WhatsApp
-</a>
-
-<a href="https://maps.google.com">
-📍 Ünvan
-</a>
-
-</div>
-
-
-<script>
-
-function show(type,button){
-
-let sections=document.querySelectorAll(".section");
-
-document.querySelectorAll("button").forEach(function(b){
-b.classList.remove("active");
-});
-
-button.classList.add("active");
-
-sections.forEach(function(section){
-
-if(type=="all"){
-section.style.display="block";
-}
-else if(section.classList.contains(type)){
-section.style.display="block";
-}
-else{
-section.style.display="none";
-}
-
-});
-
-}
-
-</script>
 
 </body>
 </html>

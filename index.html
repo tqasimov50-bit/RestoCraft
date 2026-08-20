@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>RestoCraft</title>
 
 <style>
+
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
@@ -23,15 +25,16 @@ header{
 }
 
 .logo{
-    display:inline-flex;
-    width:70px;
-    height:70px;
+    width:75px;
+    height:75px;
+    margin:auto;
     border-radius:50%;
     background:#ff7a00;
     color:#111;
+    display:flex;
     align-items:center;
     justify-content:center;
-    font-size:24px;
+    font-size:25px;
     font-weight:bold;
 }
 
@@ -50,161 +53,116 @@ h1 span{
 .categories{
     display:flex;
     gap:8px;
-    padding:15px;
+    padding:14px;
     overflow-x:auto;
     position:sticky;
     top:0;
-    z-index:10;
+    z-index:5;
     background:#111;
 }
 
-button{
+.category{
     border:0;
     padding:11px 16px;
-    border-radius:20px;
+    border-radius:22px;
     background:#222;
     color:white;
     white-space:nowrap;
-    cursor:pointer;
+    font-size:14px;
 }
 
-button.active{
+.category.active{
     background:#ff7a00;
     color:#111;
 }
 
 .menu{
-    padding:15px;
-    max-width:650px;
+    max-width:700px;
     margin:auto;
+    padding:10px 15px 30px;
 }
 
-.category-title{
+.section-title{
     color:#ff7a00;
     margin-top:25px;
+    margin-bottom:12px;
 }
 
 .item{
-    background:#1c1c1c;
-    border-radius:14px;
-    padding:12px;
-    margin:10px 0;
     display:flex;
-    gap:14px;
     align-items:center;
-    cursor:pointer;
+    gap:15px;
+    background:#1c1c1c;
+    padding:12px;
+    margin-bottom:12px;
+    border-radius:15px;
 }
 
 .item img{
-    width:90px;
-    height:90px;
+    width:105px;
+    height:105px;
     object-fit:cover;
-    border-radius:12px;
+    border-radius:13px;
+    flex-shrink:0;
 }
 
-.item-info{
+.info{
     flex:1;
 }
 
-.item h3{
-    margin:0 0 6px;
+.info h3{
+    margin:0 0 7px;
+    font-size:18px;
 }
 
-.item p{
-    color:#999;
+.info p{
     margin:0 0 10px;
+    color:#999;
     font-size:14px;
+    line-height:1.4;
 }
 
 .price{
     color:#ff7a00;
+    font-size:17px;
     font-weight:bold;
 }
 
 .contact{
-    padding:20px;
-    text-align:center;
-    max-width:650px;
+    max-width:700px;
     margin:auto;
+    padding:15px;
+    text-align:center;
 }
 
 .contact a{
     display:block;
-    padding:14px;
     margin:10px 0;
+    padding:14px;
+    border-radius:10px;
     background:#ff7a00;
     color:#111;
     text-decoration:none;
-    border-radius:10px;
     font-weight:bold;
 }
 
-
-/* MƏHSUL PƏNCƏRƏSİ */
-
-.modal{
-    display:none;
-    position:fixed;
-    z-index:100;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.85);
-    padding:20px;
-    box-sizing:border-box;
-}
-
-.modal-box{
-    max-width:500px;
-    margin:60px auto;
-    background:#1c1c1c;
-    padding:20px;
-    border-radius:20px;
-    position:relative;
-}
-
-.modal-box img{
-    width:100%;
-    height:280px;
-    object-fit:cover;
-    border-radius:15px;
-}
-
-.modal-box h2{
-    margin-top:15px;
-}
-
-.modal-box p{
-    color:#aaa;
-    line-height:1.5;
-}
-
-.close{
-    position:absolute;
-    right:15px;
-    top:5px;
-    font-size:35px;
-    color:white;
-    cursor:pointer;
+footer{
+    text-align:center;
+    color:#666;
+    padding:25px;
+    font-size:12px;
 }
 
 </style>
-
 </head>
 
 <body>
 
-
 <header>
 
-<div class="logo">
-RC
-</div>
+<div class="logo">RC</div>
 
-<h1>
-Resto<span>Craft</span>
-</h1>
+<h1>Resto<span>Craft</span></h1>
 
 <div class="subtitle">
 Müasir QR Menyu
@@ -213,27 +171,25 @@ Müasir QR Menyu
 </header>
 
 
-<!-- KATEQORİYALAR -->
-
 <div class="categories">
 
-<button class="active" onclick="showCategory('all',this)">
+<button class="category active" onclick="showCategory('all',this)">
 Hamısı
 </button>
 
-<button onclick="showCategory('salat',this)">
+<button class="category" onclick="showCategory('salat',this)">
 🥗 Salatlar
 </button>
 
-<button onclick="showCategory('yemek',this)">
+<button class="category" onclick="showCategory('yemek',this)">
 🍽️ Əsas yeməklər
 </button>
 
-<button onclick="showCategory('qutab',this)">
+<button class="category" onclick="showCategory('qutab',this)">
 🥟 Qutablar
 </button>
 
-<button onclick="showCategory('icki',this)">
+<button class="category" onclick="showCategory('icki',this)">
 🥤 İçkilər
 </button>
 
@@ -247,26 +203,15 @@ Hamısı
 
 <div class="section salat">
 
-<h2 class="category-title">
-🥗 Salatlar
-</h2>
+<h2 class="section-title">🥗 Salatlar</h2>
 
+<div class="item">
 
-<div class="item"
-onclick="openFood(
-'Çoban salatı',
-'Pomidor, xiyar, soğan və göyərtidən hazırlanmış təzə salat.',
-'5 AZN',
-'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80'
-)">
+<img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80">
 
-<img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80">
+<div class="info">
 
-<div class="item-info">
-
-<h3>
-Çoban salatı
-</h3>
+<h3>Çoban salatı</h3>
 
 <p>
 Pomidor, xiyar, soğan və göyərti
@@ -281,24 +226,16 @@ Pomidor, xiyar, soğan və göyərti
 </div>
 
 
-<div class="item"
-onclick="openFood(
-'Paytaxt salatı',
-'Klassik və ləzzətli Paytaxt salatı.',
-'6 AZN',
-'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80'
-)">
+<div class="item">
 
-<img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80">
+<img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=400&q=80">
 
-<div class="item-info">
+<div class="info">
 
-<h3>
-Paytaxt salatı
-</h3>
+<h3>Paytaxt salatı</h3>
 
 <p>
-Klassik salat
+Klassik və ləzzətli salat
 </p>
 
 <div class="price">
@@ -316,29 +253,18 @@ Klassik salat
 
 <div class="section yemek">
 
-<h2 class="category-title">
-🍽️ Əsas yeməklər
-</h2>
+<h2 class="section-title">🍽️ Əsas yeməklər</h2>
 
+<div class="item">
 
-<div class="item"
-onclick="openFood(
-'Ət kababı',
-'Manqalda hazırlanmış yumşaq və ləzzətli ət kababı.',
-'10 AZN',
-'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80'
-)">
+<img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80">
 
-<img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80">
+<div class="info">
 
-<div class="item-info">
-
-<h3>
-Ət kababı
-</h3>
+<h3>Ət kababı</h3>
 
 <p>
-Manqalda hazırlanmış ət
+Manqalda hazırlanmış yumşaq ət
 </p>
 
 <div class="price">
@@ -350,24 +276,16 @@ Manqalda hazırlanmış ət
 </div>
 
 
-<div class="item"
-onclick="openFood(
-'Azərbaycan plovu',
-'Ənənəvi Azərbaycan mətbəxinin ləzzətli plovu.',
-'8 AZN',
-'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80'
-)">
+<div class="item">
 
-<img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80">
+<img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=400&q=80">
 
-<div class="item-info">
+<div class="info">
 
-<h3>
-Azərbaycan plovu
-</h3>
+<h3>Azərbaycan plovu</h3>
 
 <p>
-Ənənəvi plov
+Ənənəvi Azərbaycan plovu
 </p>
 
 <div class="price">
@@ -385,29 +303,18 @@ Azərbaycan plovu
 
 <div class="section qutab">
 
-<h2 class="category-title">
-🥟 Qutablar
-</h2>
+<h2 class="section-title">🥟 Qutablar</h2>
 
+<div class="item">
 
-<div class="item"
-onclick="openFood(
-'Ət qutabı',
-'Ət ilə hazırlanmış ənənəvi qutab.',
-'2 AZN',
-'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80'
-)">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=400&q=80">
 
-<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80">
+<div class="info">
 
-<div class="item-info">
-
-<h3>
-Ət qutabı
-</h3>
+<h3>Ət qutabı</h3>
 
 <p>
-Ət ilə hazırlanmış qutab
+Ət ilə hazırlanmış ənənəvi qutab
 </p>
 
 <div class="price">
@@ -419,21 +326,13 @@ onclick="openFood(
 </div>
 
 
-<div class="item"
-onclick="openFood(
-'Pendir qutabı',
-'Əridilmiş pendir ilə hazırlanmış qutab.',
-'2 AZN',
-'https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=80'
-)">
+<div class="item">
 
-<img src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=80">
+<img src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=400&q=80">
 
-<div class="item-info">
+<div class="info">
 
-<h3>
-Pendir qutabı
-</h3>
+<h3>Pendir qutabı</h3>
 
 <p>
 Pendir ilə hazırlanmış qutab
@@ -448,24 +347,16 @@ Pendir ilə hazırlanmış qutab
 </div>
 
 
-<div class="item"
-onclick="openFood(
-'Göy qutabı',
-'Təzə göyərti ilə hazırlanmış qutab.',
-'1.50 AZN',
-'https://images.unsplash.com/photo-1628294895950-9805252327f3?auto=format&fit=crop&w=800&q=80'
-)">
+<div class="item">
 
-<img src="https://images.unsplash.com/photo-1628294895950-9805252327f3?auto=format&fit=crop&w=800&q=80">
+<img src="https://images.unsplash.com/photo-1628294895950-9805252327f3?auto=format&fit=crop&w=400&q=80">
 
-<div class="item-info">
+<div class="info">
 
-<h3>
-Göy qutabı
-</h3>
+<h3>Göy qutabı</h3>
 
 <p>
-Təzə göyərti ilə
+Təzə göyərti ilə hazırlanmış qutab
 </p>
 
 <div class="price">
@@ -483,26 +374,15 @@ Təzə göyərti ilə
 
 <div class="section icki">
 
-<h2 class="category-title">
-🥤 İçkilər
-</h2>
+<h2 class="section-title">🥤 İçkilər</h2>
 
+<div class="item">
 
-<div class="item"
-onclick="openFood(
-'Cola',
-'330 ml soyuq Cola.',
-'2 AZN',
-'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80'
-)">
+<img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=400&q=80">
 
-<img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=80">
+<div class="info">
 
-<div class="item-info">
-
-<h3>
-Cola
-</h3>
+<h3>Cola</h3>
 
 <p>
 330 ml
@@ -517,21 +397,13 @@ Cola
 </div>
 
 
-<div class="item"
-onclick="openFood(
-'Su',
-'Təmiz içməli su.',
-'1 AZN',
-'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=800&q=80'
-)">
+<div class="item">
 
-<img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=800&q=80">
+<img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=400&q=80">
 
-<div class="item-info">
+<div class="info">
 
-<h3>
-Su
-</h3>
+<h3>Su</h3>
 
 <p>
 500 ml
@@ -569,85 +441,44 @@ Su
 </div>
 
 
-<!-- MƏHSUL MODALI -->
-
-<div id="foodModal" class="modal">
-
-<div class="modal-box">
-
-<span class="close" onclick="closeFood()">
-×
-</span>
-
-<img id="modalImage">
-
-<h2 id="modalName"></h2>
-
-<p id="modalDescription"></p>
-
-<div id="modalPrice" class="price"></div>
-
-</div>
-
-</div>
+<footer>
+RestoCraft © 2026
+</footer>
 
 
 <script>
 
-function showCategory(category,button){
+function showCategory(type,button){
 
-const sections=document.querySelectorAll(".section");
+var sections = document.getElementsByClassName("section");
 
-const buttons=document.querySelectorAll(".category");
+var buttons = document.getElementsByClassName("category");
 
-buttons.forEach(function(btn){
-btn.classList.remove("active");
-});
+for(var i=0;i<buttons.length;i++){
+    buttons[i].classList.remove("active");
+}
 
 button.classList.add("active");
 
-sections.forEach(function(section){
+for(var i=0;i<sections.length;i++){
 
-if(category==="all"){
-section.style.display="block";
-}
+    if(type=="all"){
+        sections[i].style.display="block";
+    }
 
-else if(section.classList.contains(category)){
-section.style.display="block";
-}
+    else if(sections[i].classList.contains(type)){
+        sections[i].style.display="block";
+    }
 
-else{
-section.style.display="none";
-}
-
-});
+    else{
+        sections[i].style.display="none";
+    }
 
 }
-
-
-function openFood(name,description,price,image){
-
-document.getElementById("modalName").innerText=name;
-
-document.getElementById("modalDescription").innerText=description;
-
-document.getElementById("modalPrice").innerText=price;
-
-document.getElementById("modalImage").src=image;
-
-document.getElementById("foodModal").style.display="block";
-
-}
-
-
-function closeFood(){
-
-document.getElementById("foodModal").style.display="none";
 
 }
 
 </script>
-
 
 </body>
 </html>
